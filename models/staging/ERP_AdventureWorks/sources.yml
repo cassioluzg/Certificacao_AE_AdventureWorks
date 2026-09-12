@@ -1,0 +1,42 @@
+version: 2
+
+sources:
+  - name: ERP_AdventureWorks
+    database: fea_academy
+    schema: adventure_works
+    description: fonte de dados do ERP AdventureWorks
+    tables:
+      - name: production_product
+        description: Cadastro de produtos
+        columns:
+          - name: productid
+            description: pk do produto.
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_salesorderheader
+        description: Cabeçalho dos pedidos de venda.
+        columns:
+          - name: salesorderid
+            description: pk do pedido de venda.
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_salesorderdetail
+        description: Itens de cada pedido de venda.
+        columns:
+          - name: salesorderdetailid
+            description: pk do item de pedido.
+            tests:
+              - unique
+              - not_null
+          - name: salesorderid
+            description: fk do pedido de venda.
+            tests:
+              - not_null
+          - name: productid
+            description: fk do produto.
+            tests:
+              - not_null

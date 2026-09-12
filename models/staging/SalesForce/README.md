@@ -1,0 +1,1 @@
+Diretório criado para representar uma fonte de dados futura a fim de estruturar a arquitetura de dados de forma completa.
