@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_produto
+    description: Dimensão de produtos.
+    columns:
+      - name: produto_id
+        description: pk da dimensão produto.
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_vendas
+    description: Fato de vendas no grão de item de pedido.
+    columns:
+      - name: pk_vendas
+        description: pk da fato, concatenação de pedido_id e pedido_detalhe_id.
+        tests:
+          - unique
+          - not_null
+      - name: produto_id
+        description: pk da dimensão produto.
+      - name: valor_total_bruto
+        description: "Preço unitário multiplicado pela quantidade (sem desconto)."
+      - name: valor_total_liquido
+        description: "Valor bruto aplicado o desconto percentual do item."
