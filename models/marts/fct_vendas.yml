@@ -1,15 +1,6 @@
 version: 2
 
 models:
-  - name: dim_produto
-    description: Dimensão de produtos.
-    columns:
-      - name: produto_id
-        description: pk da dimensão produto.
-        tests:
-          - unique
-          - not_null
-
   - name: fct_vendas
     description: Fato de vendas no grão de item de pedido.
     columns:

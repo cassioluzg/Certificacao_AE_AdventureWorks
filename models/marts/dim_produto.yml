@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: dim_produto
+    description:
+      Dimensão de produtos da Adventure Works. Uma linha por produto,
+      com atributos descritivos (nome, cor, linha, classe, preço de lista).
+      
+    columns:
+      - name: produto_id
+        description: Chave primária da dimensão produto.
+        tests:
+          - unique
+          - not_null
+
+      - name: nome_produto
+        description: Nome comercial do produto.
+
+      - name: codigo_produto
+        description: Código/SKU interno do produto.
+
+      - name: cor_produto
+        description: Cor do produto, quando aplicável.
+
+      - name: tamanho_produto
+        description: Tamanho do produto, quando aplicável.
+
+      - name: peso_produto
+        description: Peso do produto.
+
+      - name: linha_produto
+        description: Linha de produto à qual o item pertence.
+
+      - name: classe_produto
+        description: Classe do produto (ex: alta, média, baixa linha).
+
+      - name: estilo_produto
+        description: Estilo do produto.
+
+      - name: subcategoria_produto_id
+        description: Chave estrangeira para a subcategoria do produto.
+
+      - name: modelo_produto_id
+        description: Chave estrangeira para o modelo do produto.
+
+      - name: custo_padrao
+        description: Custo padrão de produção/aquisição do produto.
+
+      - name: preco_lista
+        description: Preço de lista (tabela) do produto.
+
+      - name: data_inicio_venda
+        description: Data em que o produto começou a ser vendido.
+
+      - name: data_fim_venda
+        description: Data em que o produto deixou de ser vendido, se aplicável.

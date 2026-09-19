@@ -1,9 +1,8 @@
 with
-
     source as (
         select * from {{ source('erp_adventureworks', 'sales_salesorderdetail') }}
     ),
-    
+
     source_pedidos_detalhados as (
         select
             cast(salesorderdetailid as int) as pedido_detalhe_id

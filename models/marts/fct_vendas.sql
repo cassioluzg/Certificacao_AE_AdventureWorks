@@ -9,26 +9,38 @@ with
 
     fato_vendas as (
         select
-            pedidos_itens.pk_vendas
-            , pedidos_itens.pedido_id
-            , pedidos_itens.pedido_detalhe_id
-            , pedidos_itens.produto_id
-            , pedidos_itens.cliente_id
-            , pedidos_itens.vendedor_id
-            , pedidos_itens.territorio_id
-            , pedidos_itens.status_pedido
-            , pedidos_itens.data_pedido
-            , pedidos_itens.quantidade
-            , pedidos_itens.preco_unitario
-            , pedidos_itens.desconto_percentual
-            , cast(pedidos_itens.preco_unitario * pedidos_itens.quantidade as decimal(12,2)) as valor_total_bruto
-            , cast(
-                pedidos_itens.preco_unitario * pedidos_itens.quantidade * (1 - pedidos_itens.desconto_percentual)
-                as decimal(12,2)
-            ) as valor_total_liquido
-        from pedidos_itens
-        left join produtos
-            on pedidos_itens.produto_id = produtos.produto_id
+
+            pi.pedido_id
+            , pi.cliente_id
+            , pi.vendedor_id
+            , pi.territorio_id
+            , pi.endereco_cobranca_id
+            , pi.endereco_entrega_id
+            , pi.metodo_envio_id
+            , pi.cartao_credito_id
+            , pi.status_pedido
+            , pi.pedido_online
+            , pi.valor_subtotal
+            , pi.valor_imposto
+            , pi.valor_frete
+            , pi.valor_total_devido
+            , pi.data_pedido
+            , pi.data_entrega
+            , pi.data_envio
+            , pi.numero_revisao
+            , pi.numero_pedido_compra
+            , pi.pedido_detalhe_id
+            , pi.produto_id
+            , pi.oferta_especial_id
+            , p1.quantidade
+            , p1.preco_unitario
+            , p1.desconto_percentual
+            , p1.codigo_rastreio
+            , p.nome_produto
+
+        from pedidos_itens as pi
+        left join produtos as p
+        on pi.produto_id = p.produto_id
     )
 
 select * from fato_vendas

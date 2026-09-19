@@ -1,0 +1,11 @@
+version: 2
+models:
+  - name: dim_calendario
+    description: Dimensão calendário gerada a partir do intervalo de datas de pedidos de vendas.
+   
+    columns:
+      - name: data_id
+        description: Data no formato yyyy-MM-dd. Primary key da dimensão.
+        tests:
+          - unique
+          - not_null
