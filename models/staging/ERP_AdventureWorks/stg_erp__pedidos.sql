@@ -1,4 +1,8 @@
 WITH
+    source as (
+        select * from {{ source('erp_adventureworks', 'sales_salesorderheader') }}
+    ),
+
     source_pedidos as (
         select
             cast(salesorderid as int) as pedido_id
@@ -20,6 +24,7 @@ WITH
             , cast(shipdate as date) as data_envio
             , cast(revisionnumber as int) as numero_revisao
             , cast(purchaseordernumber as string) as numero_pedido_compra
-        from {{ source('ERP_AdventureWorks', 'sales_salesorderheader') }}
+        from source
     )
+    
 select * from source_pedidos

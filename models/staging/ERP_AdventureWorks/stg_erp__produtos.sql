@@ -1,4 +1,8 @@
 with
+    source as (
+        select * from {{ source('erp_adventureworks', 'production_product') }}
+    ),
+
     source_produtos as (
         select
             cast(productid as int) as produto_id
@@ -16,7 +20,7 @@ with
             , cast(productmodelid as int) as modelo_produto_id
             , cast(sellstartdate as date) as data_inicio_venda
             , cast(sellenddate as date) as data_fim_venda
-        from {{ source('ERP_AdventureWorks', 'production_product') }}
+        from source
     )
 select * from source_produtos
     

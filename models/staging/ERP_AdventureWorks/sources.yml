@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: ERP_AdventureWorks
+  - name: erp_adventureworks
     database: fea_academy
     schema: adventure_works
     description: fonte de dados do ERP AdventureWorks

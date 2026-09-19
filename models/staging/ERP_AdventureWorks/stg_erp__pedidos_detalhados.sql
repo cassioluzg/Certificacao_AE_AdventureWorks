@@ -1,4 +1,9 @@
 with
+
+    source as (
+        select * from {{ source('erp_adventureworks', 'sales_salesorderdetail') }}
+    ),
+    
     source_pedidos_detalhados as (
         select
             cast(salesorderdetailid as int) as pedido_detalhe_id
@@ -9,6 +14,7 @@ with
             , cast(unitprice as decimal(10,2)) as preco_unitario
             , cast(unitpricediscount as decimal(10,4)) as desconto_percentual
             , cast(carriertrackingnumber as string) as codigo_rastreio
-        from {{ source('ERP_AdventureWorks', 'sales_salesorderdetail') }}
+        from source
     )
+
 select * from source_pedidos_detalhados
