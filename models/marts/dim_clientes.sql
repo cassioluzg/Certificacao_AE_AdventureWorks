@@ -1,10 +1,10 @@
 with
     source_clientes as (
-        select * from {{ ref('stg_erp__clientes')}}
+        select * from {{ ref('stg_erp__cadastro_clientes')}}
     ),
 
     source_pessoas as (
-        select * from {{ ref('stg_erp__pessoas')}}
+        select * from {{ ref('stg_erp__cadastro_pessoas')}}
     ),
 
     clientes as (

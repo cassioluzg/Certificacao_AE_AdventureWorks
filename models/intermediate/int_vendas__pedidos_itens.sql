@@ -35,7 +35,6 @@ with
             , pd.quantidade
             , pd.preco_unitario
             , pd.desconto_percentual
-            , pd.codigo_rastreio
         from source_pedidos_detalhados as pd
         left join source_pedidos as p
             on pd.pedido_id = p.pedido_id

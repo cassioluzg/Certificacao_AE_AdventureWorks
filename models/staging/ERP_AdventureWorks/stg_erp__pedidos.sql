@@ -1,9 +1,9 @@
 WITH
-    source as (
+    source_pedidos as (
         select * from {{ source('erp_adventureworks', 'sales_salesorderheader') }}
     ),
 
-    source_pedidos as (
+    pedidos as (
         select
             cast(salesorderid as int) as pedido_id
             , cast(customerid as int) as cliente_id
@@ -27,4 +27,4 @@ WITH
         from source_pedidos
     )
     
-select * from source_pedidos
+select * from pedidos

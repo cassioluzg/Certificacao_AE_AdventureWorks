@@ -26,10 +26,10 @@ with
             , pi.quantidade
             , pi.preco_unitario
             , pi.desconto_percentual
-            , cast(pi.preco_unitario * pi.quantidade as decimal(12,2)) as valor_total_bruto
+            , cast(pi.preco_unitario * pi.quantidade as decimal(19,4)) as valor_total_bruto
             , cast(
                 pi.preco_unitario * pi.quantidade * (1 - pi.desconto_percentual)
-                as decimal(12,2)
+                as decimal(19,4)
             ) as valor_total_liquido
             , pm.motivos_venda
         from source_int_pedidos_itens as pi
