@@ -2,7 +2,7 @@
     
 with
 
-limites as (
+datas_limites as (
     select
         min(data_pedido) as data_min
         , max(data_pedido) as data_max
@@ -11,8 +11,8 @@ limites as (
 
 calendario as (
     select
-        explode(sequence(limites.data_min, limites.data_max, interval 1 day)) as data
-    from limites
+        explode(sequence(datas_limites.data_min, datas_limites.data_max, interval 1 day)) as data
+    from datas_limites
 )
 
 select

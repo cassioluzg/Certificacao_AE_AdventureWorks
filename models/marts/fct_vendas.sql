@@ -1,46 +1,40 @@
 with
-    pedidos_itens as (
+
+    source_int_pedidos_itens as (
         select * from {{ ref('int_vendas__pedidos_itens') }}
     ),
 
-    produtos as (
-        select * from {{ ref('dim_produto') }}
+    source_int_pedidos_motivos as (
+        select
+            pedido_id
+            , array_join(collect_set(motivo_venda_descricao), ', ') as motivos_venda
+        from {{ ref('int_vendas__pedidos_motivos') }}
+        group by pedido_id
     ),
 
     fato_vendas as (
         select
-
-            pi.pedido_id
-            , pi.cliente_id
-            , pi.vendedor_id
-            , pi.territorio_id
-            , pi.endereco_cobranca_id
-            , pi.endereco_entrega_id
-            , pi.metodo_envio_id
-            , pi.cartao_credito_id
-            , pi.status_pedido
-            , pi.pedido_online
-            , pi.valor_subtotal
-            , pi.valor_imposto
-            , pi.valor_frete
-            , pi.valor_total_devido
-            , pi.data_pedido
-            , pi.data_entrega
-            , pi.data_envio
-            , pi.numero_revisao
-            , pi.numero_pedido_compra
+            pi.pk_vendas
+            , pi.pedido_id
             , pi.pedido_detalhe_id
             , pi.produto_id
-            , pi.oferta_especial_id
-            , p1.quantidade
-            , p1.preco_unitario
-            , p1.desconto_percentual
-            , p1.codigo_rastreio
-            , p.nome_produto
-
-        from pedidos_itens as pi
-        left join produtos as p
-        on pi.produto_id = p.produto_id
+            , pi.cliente_id
+            , pi.cartao_credito_id
+            , pi.endereco_entrega_id
+            , pi.status_pedido
+            , pi.data_pedido
+            , pi.quantidade
+            , pi.preco_unitario
+            , pi.desconto_percentual
+            , cast(pi.preco_unitario * pi.quantidade as decimal(12,2)) as valor_total_bruto
+            , cast(
+                pi.preco_unitario * pi.quantidade * (1 - pi.desconto_percentual)
+                as decimal(12,2)
+            ) as valor_total_liquido
+            , pm.motivos_venda
+        from source_int_pedidos_itens as pi
+        left join source_int_pedidos_motivos as pm
+            on pi.pedido_id = pm.pedido_id
     )
 
 select * from fato_vendas

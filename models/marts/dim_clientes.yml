@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_clientes
+    description: Dimensão de clientes, combinando o vínculo comercial (Customer) com os dados pessoais (Person).
+    columns:
+      - name: cliente_id
+        description: Chave primária da dimensão cliente.
+        tests:
+          - unique
+          - not_null
+
+      - name: pessoa_id
+        description: Chave estrangeira para a pessoa física associada ao cliente.
+
+      - name: loja_id
+        description: Chave estrangeira para a loja, quando o cliente é uma revenda (B2B).
+
+      - name: territorio_id
+        description: Chave estrangeira para o território de vendas do cliente.
+
+      - name: pessoa_titulo
+        description: Título/tratamento da pessoa (Sr., Sra., Dr. etc.).
+
+      - name: pessoa_nome
+        description: Primeiro nome do cliente.
+
+      - name: pessoa_sobrenome
+        description: Sobrenome do cliente.

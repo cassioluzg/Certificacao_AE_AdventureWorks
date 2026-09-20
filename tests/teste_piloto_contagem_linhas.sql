@@ -13,7 +13,7 @@ with
 
     contagem_origem as (
         select count(*) as total_origem
-        from {{ source('ERP_AdventureWorks', 'sales_salesorderdetail') }}
+        from {{ source('erp_adventureworks', 'sales_salesorderdetail') }}
     )
 
 select

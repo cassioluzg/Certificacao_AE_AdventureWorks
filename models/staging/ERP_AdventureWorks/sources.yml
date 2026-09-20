@@ -40,3 +40,74 @@ sources:
             description: fk do produto.
             tests:
               - not_null
+      
+      - name: sales_customer
+        description: Clientes.
+        columns:
+          - name: customerid
+            description: pk do cliente.
+            tests:
+              - unique
+              - not_null
+
+      - name: person_person
+        description: Dados pessoais das pessoas.
+        columns:
+          - name: businessentityid
+            description: pk da pessoa.
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_creditcard
+        description: Cartões de crédito.
+        columns:
+          - name: creditcardid
+            description: pk do cartão de crédito.
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_salesreason
+        description: Motivos dos pedidos.
+        columns:
+          - name: salesreasonid
+            description: pk do motivo do pedido.
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_salesorderheadersalesreason
+        description: Relação entre cabeçalhos de pedidos e motivos.
+        columns:
+          - name: salesorderid
+            description: fk do pedido de venda.
+            tests:
+              - not_null
+
+      - name: person_address
+        description: Endereços das pessoas.
+        columns:
+          - name: addressid
+            description: pk do endereço.
+            tests:
+              - unique
+              - not_null
+
+      - name: person_stateprovince
+        description: Estados e províncias.
+        columns:
+          - name: stateprovinceid
+            description: pk do estado/província.
+            tests:
+              - unique
+              - not_null
+
+      - name: person_countryregion
+        description: Regiões do país.
+        columns:
+          - name: countryregionid
+            description: pk da região do país.
+            tests:
+              - unique
+              - not_null

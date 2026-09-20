@@ -1,17 +1,16 @@
 with
-    source as (
+    source_endereco as (
         select * from {{ source('erp_adventureworks', 'person_address') }}
     ),
 
-    source_endereco as (
+    endereco as (
         select
             cast(addressid as int) as endereco_id
             , cast(addressline1 as string) as endereco_linha1
             , cast(addressline2 as string) as endereco_linha2
             , cast(city as string) as cidade
-            , cast(stateprovinceid as int) as estado_provincia_id
-            , cast(postalcode as string) as codigo_postal
-        from source
+            , cast(stateprovinceid as int) as estado_id
+        from source_endereco
     )
 
-select * from source_endereco
+select * from endereco

@@ -1,34 +1,29 @@
 with
-    source_enderecos as (
-        select * from {{ ref('stg_erp__enderecos')}}
+    enderecos as (
+        select * from {{ ref('stg_erp__endereco')}}
     ),
 
-    source_estados as (
-        select * from {{ ref('stg_erp__estados')}}
+    estados as (
+        select * from {{ ref('stg_erp__estado')}}
     ),
 
-    source_paises as (
-        select * from {{ ref('stg_erp__paises')}}
+    paises as (
+        select * from {{ ref('stg_erp__pais')}}
     ),
 
     localizacao as (
         select
-            e.endereco_id
-            , e.logradouro
-            , e.numero
-            , e.complemento
-            , e.bairro
-            , e.cidade
-            , e.estado_id
-            , es.nome_estado
-            , es.sigla_estado
-            , es.pais_id
-            , p.nome_pais
-        from source_enderecos as e
-        left join source_estados as es 
-            on e.estado_id = es.estado_id
-        left join source_paises as p 
-            on es.pais_id = p.pais_id
+            ed.endereco_id
+            , ed.endereco_linha1 || " " || ed.endereco_linha2 as logradouro
+            , ed.cidade
+            , es.estado_nome
+            , es.uf_estado
+            , p.pais_nome
+        from enderecos as ed
+        left join estados as es
+            on ed.estado_id = es.estado_id
+        left join paises as p
+            on es.pais_codigo = p.pais_codigo
     )
 
 select * from localizacao

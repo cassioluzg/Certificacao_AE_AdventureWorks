@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: dim_cartao
+    description: Dimensão de tipos de cartão de crédito usados nos pedidos de venda.
+    columns:
+      - name: cartao_credito_id
+        description: Chave primária da dimensão cartão de crédito.
+        tests:
+          - unique
+          - not_null
+
+      - name: tipo_cartao
+        description: Tipo/bandeira do cartão (ex Vista, SuperiorCard, Distinguish).

@@ -2,16 +2,40 @@ version: 2
 
 models:
   - name: fct_vendas
-    description: Fato de vendas no grão de item de pedido.
+    description: Fato de vendas no grão de item de pedido (uma linha por produto dentro de um pedido).
     columns:
       - name: pk_vendas
-        description: pk da fato, concatenação de pedido_id e pedido_detalhe_id.
+        description: Chave primária da fato, concatenação de pedido_id e pedido_detalhe_id.
         tests:
           - unique
           - not_null
+      - name: pedido_id
+        description: Chave estrangeira para o pedido de venda.
+      - name: pedido_detalhe_id
+        description: Identificador do item dentro do pedido.
       - name: produto_id
-        description: pk da dimensão produto.
+        description: Chave estrangeira para dim_produto.
+      - name: cliente_id
+        description: Chave estrangeira para dim_clientes.
+      - name: cartao_credito_id
+        description: Chave estrangeira para dim_cartao.
+      - name: endereco_entrega_id
+        description: Chave estrangeira para dim_localizacao (endereço de entrega).
+      - name: status_pedido
+        description: Código de status do pedido de venda.
+      - name: data_pedido
+        description: Data em que o pedido foi realizado.
+      - name: quantidade
+        description: Quantidade comprada do produto nesse item de pedido.
+      - name: preco_unitario
+        description: Preço unitário do produto no momento da venda.
+      - name: desconto_percentual
+        description: Percentual de desconto aplicado ao item.
       - name: valor_total_bruto
         description: "Preço unitário multiplicado pela quantidade (sem desconto)."
       - name: valor_total_liquido
         description: "Valor bruto aplicado o desconto percentual do item."
+      - name: motivos_venda
+        description: >
+          Motivo(s) de venda associados ao pedido, concatenados quando há
+          mais de um (relação N:N original entre pedido e motivo de venda).

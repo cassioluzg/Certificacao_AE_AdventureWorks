@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_motivo_venda
+    description: Dimensão de motivos de venda (ex Promotion, Quality, Price, Manufacturer).
+    columns:
+      - name: motivo_venda_id
+        description: Chave primária da dimensão motivo de venda.
+        tests:
+          - unique
+          - not_null
+
+      - name: motivo_venda_descricao
+        description: Descrição do motivo de venda (ex "Promotion").
+
+      - name: motivo_venda_tipo
+        description: Categoria do motivo de venda (ex "Promotion", "Marketing", "Other").

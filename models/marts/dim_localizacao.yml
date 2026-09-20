@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_localizacao
+    description: >
+      Dimensão de localização geográfica (endereço, estado/província e país),
+      usada para segmentar vendas por cidade, estado e país.
+    columns:
+      - name: endereco_id
+        description: Chave primária da dimensão localização.
+        tests:
+          - unique
+          - not_null
+
+      - name: logradouro
+        description: Endereço completo (linha 1 + linha 2 concatenadas).
+
+      - name: cidade
+        description: Cidade do endereço.
+
+      - name: estado_nome
+        description: Nome do estado ou província.
+
+      - name: uf_estado
+        description: Sigla/código do estado ou província.
+
+      - name: pais_nome
+        description: Nome do país/região.

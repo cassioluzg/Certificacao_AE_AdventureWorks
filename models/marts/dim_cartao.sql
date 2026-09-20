@@ -4,9 +4,6 @@ with
     )
 
 select
-    cartao_id
-    , numero_cartao
-    , nome_titular
-    , data_validade
-    , codigo_seguranca
+    cartao_credito_id
+    , tipo_cartao
 from cartoes

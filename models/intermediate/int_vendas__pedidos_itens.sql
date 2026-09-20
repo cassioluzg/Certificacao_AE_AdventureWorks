@@ -1,15 +1,16 @@
-WITH
-    pedidos as (
-        select * from {{ ref('stg_erp__pedidos')}}
+with
+    source_pedidos as (
+        select * from {{ ref('stg_erp__pedidos') }}
     ),
 
-    pedidos_detalhados as (
-        select * from {{ ref('stg_erp__pedidos_detalhados')}}
+    source_pedidos_detalhados as (
+        select * from {{ ref('stg_erp__pedidos_detalhados') }}
     ),
 
     pedidos_itens as (
         select
-            p.pedido_id
+            cast(pd.pedido_id as string) || '-' || cast(pd.pedido_detalhe_id as string) as pk_vendas
+            , pd.pedido_id
             , p.cliente_id
             , p.vendedor_id
             , p.territorio_id
@@ -35,9 +36,9 @@ WITH
             , pd.preco_unitario
             , pd.desconto_percentual
             , pd.codigo_rastreio
-
-        from pedidos_detalhados as pd
-        left join pedidos as p
+        from source_pedidos_detalhados as pd
+        left join source_pedidos as p
             on pd.pedido_id = p.pedido_id
     )
+
 select * from pedidos_itens

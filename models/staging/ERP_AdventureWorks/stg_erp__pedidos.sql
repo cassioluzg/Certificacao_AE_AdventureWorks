@@ -24,7 +24,7 @@ WITH
             , cast(shipdate as date) as data_envio
             , cast(revisionnumber as int) as numero_revisao
             , cast(purchaseordernumber as string) as numero_pedido_compra
-        from source
+        from source_pedidos
     )
     
 select * from source_pedidos
