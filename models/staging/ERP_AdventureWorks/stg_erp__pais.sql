@@ -5,7 +5,7 @@ with
 
     pais as (
         select
-            cast(countryregioncode as string) as pais_codigo
+            coalesce(cast(countryregioncode as string), 'N/A') as pais_codigo
             , cast(name as string) as pais_nome
         from source_pais
     )

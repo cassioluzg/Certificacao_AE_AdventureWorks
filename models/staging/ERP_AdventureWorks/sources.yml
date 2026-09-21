@@ -104,16 +104,17 @@ sources:
               - not_null
 
       - name: person_countryregion
-        description: >
-          Regiões do país. Observação: o registro da Namíbia tem countryregioncode
-          nulo na origem — provável efeito colateral do código ISO da Namíbia ser
-          "NA", frequentemente interpretado como valor nulo em cargas/exportações
-          de dados. Teste rebaixado para warn por esse motivo conhecido.
+        description: Regiões do país. O controle not_null será realizado na etapa de staging,
+          onde esse valor será substituído por 'N/A' para evitar problemas de integridade referencial.
         columns:
           - name: countryregioncode
             description: pk da região do país.
             tests:
-              - not_null:
-                  config:
-                    severity: warn
               - unique
+
+models:
+  - name: stg_erp__pais
+    columns:
+      - name: pais_codigo
+        tests:
+          - not_null
